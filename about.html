@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Clustering</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 75%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="map"></div>
+    <div id="CSVout"></div>
+    <script>
+      var map;
+      function initMap() {
+
+         map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: -28.024, lng: 140.887}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+		
+      }
+ 
+        var locations = [] ;
+        /**
+        //xhttp needed to load the csv file
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               // Typical action to be performed when the document is ready:
+               
+               console.log(this.responseText);
+               //test= this.responseText;
+               var lines = this.responseText.split("\n");
+               for(i=0;i<lines.length;i++){
+                   
+                    var fields = lines[i].split(",");
+                    if(i>0){
+                    if(i+1<lines.length){
+                        //This is where the location will be at
+                        //locations.push("{lat: "+fields[2]+", lng: "+fields[3]+"}");
+                        //console.log("Lat: "+ fields[2]+", Long:"+fields[3]);
+                        
+                        //
+                        locations.push({
+                            lat:Number(fields[2]),
+                            lng:Number(fields[3])
+                        });
+                       
+                       
+                   }else{
+                   }}
+               }
+               
+               //document.getElementById("CSVout").innerHTML = locations;
+               
+            }
+        };
+        
+        xhttp.open("GET", "GPS_50.csv", true);
+        xhttp.send();   
+        
+  */
+
+       
+        var locations = [
+        {lat: -33.8405194,  lng:121.8611673},
+        {lat:-33.840633,    lng:121.8611744},
+        {lat:-33.8406991,   lng:121.8608793},
+        {lat:-33.8406935,   lng:121.8608303},
+        {lat:-33.8445061	,lng:121.8612929},
+        {lat:-33.8413604	,lng:121.8602497},
+        {lat:-33.8418488	,lng:121.8553999},
+        {lat:-33.8417912	,lng:121.8558868},
+        {lat:-33.8422352	,lng:121.852332},
+        {lat:-33.8422879	,lng:121.8534926},
+        {lat:-33.8454487	,lng:121.855852},
+        {lat:-33.8590399	,lng:121.869024},
+        {lat:-33.8588368	,lng:121.8691823},
+        {lat:-33.8553472	,lng:121.8650115},
+        {lat:-33.8555108	,lng:121.8650404},
+        {lat:-33.8553631	,lng:121.8649924},
+        {lat:-33.8553983	,lng:121.8649887},
+        {lat:-33.8554326	,lng:121.8650013},
+        {lat:-33.8553292	,lng:121.8649768},
+        {lat:-33.8554096	,lng:121.8649807},
+        {lat:-33.8551878	,lng:121.8650183},
+        {lat:-33.8553781	,lng:121.8649727},
+        {lat:-33.8553621	,lng:121.8650055},
+        {lat:-33.8552137	,lng:121.864963},
+        {lat:-33.8556116	,lng:121.8649147},
+        {lat:-33.8553866	,lng:121.8650288},
+        {lat:-33.8552633	,lng:121.8650333},
+        {lat:-33.8554024	,lng:121.8650237},
+        {lat:-33.8554192	,lng:121.8649399},
+        {lat:-33.8553904	,lng:121.864987},
+        {lat:-33.8553382	,lng:121.8649489},
+        {lat:-33.8553549	,lng:121.8649457},
+        {lat:-33.8554227	,lng:121.8649819},
+        {lat:-33.8554352	,lng:121.8649376},
+        {lat:-33.8554335	,lng:121.8650648},
+        {lat:-33.8554091	,lng:121.8649907},
+        {lat:-33.855771	,lng:121.8653577},
+        {lat:-33.8573887	,lng:121.8667394}
+
+    ]
+        
+    /***var locations = [
+        {lat: -31.563910, lng: 147.154312},
+        {lat: -33.718234, lng: 150.363181},
+        {lat: -33.727111, lng: 150.371124},
+        {lat: -33.848588, lng: 151.209834},
+        {lat: -33.851702, lng: 151.216968},
+        {lat: -34.671264, lng: 150.863657},
+        {lat: -35.304724, lng: 148.662905},
+        {lat: -36.817685, lng: 175.699196},
+        {lat: -36.828611, lng: 175.790222},
+        {lat: -37.750000, lng: 145.116667},
+        {lat: -37.759859, lng: 145.128708},
+        {lat: -37.765015, lng: 145.133858},
+        {lat: -37.770104, lng: 145.143299},
+        {lat: -37.773700, lng: 145.145187},
+        {lat: -37.774785, lng: 145.137978},
+        {lat: -37.819616, lng: 144.968119},
+        {lat: -38.330766, lng: 144.695692},
+        {lat: -39.927193, lng: 175.053218},
+        {lat: -41.330162, lng: 174.865694},
+        {lat: -42.734358, lng: 147.439506},
+        {lat: -42.734358, lng: 147.501315},
+        {lat: -42.735258, lng: 147.438000},
+        {lat: -43.999792, lng: 170.463352}
+      ]*/
+
+    </script>
+	
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+	
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcF3m-1qqbjZ9W7DM8UxZoMMkj8QFHJYU&callback=initMap">
+    </script>
+
+        
+        <div>This is the maptest page</div>
+        <p><strong>Note:</strong> Some of the fields may not be supported in Firefox, or Internet Explorer 11 and earlier versions.</p>
+		<i>By Mohamad Saiful Akmal (33064922)</i>
+                <a href ="/">Home</a>
+                <a href ="/about">About</a>
+                <a href ="/profile">Profile</a>
+                
+        
+                
+    </body>
+</html>
